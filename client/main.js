@@ -35,8 +35,8 @@ const renderPlayers = (players) => {
           {player.score}
         </td>
         <td>
-          {player.name} 
-        </td> 
+          {player.name}
+        </td>
         <td>
           <button onClick={() => handleIncrement(event, player)}>
             +
@@ -58,25 +58,13 @@ const renderPlayers = (players) => {
   });
 }
 
-const persistPlayerName = (event) => {
-  event.preventDefault();
-  const playerName = event.target.playerName.value.trim();
-  if(playerName) {
-    event.target.playerName.value = "";
-    Players.insert({
-      name: playerName,
-      score: 0
-    });
-  }
-}
 
 Meteor.startup(() => {
   Tracker.autorun(() => {
     const players = Players.find().fetch();
-    let title = "Score Keep"
     let jsx = (
       <div>
-        <TitleBar title />
+        <TitleBar title="Score Keep" subtitle="created by Ingo Fahrentholz" />
         <table style={{marginBottom: "30px"}} cellPadding="5">
           <thead>
             <tr>
@@ -90,10 +78,6 @@ Meteor.startup(() => {
           </tbody>
         </table>
         <AddPlayer />
-        <form onSubmit={persistPlayerName}>
-          <input type="text" name="playerName" placeholder="Player name" />
-          <button type="submit">Add Player</button>
-        </form>
       </div>
     );
     ReactDOM.render(jsx, document.getElementById("app"));
