@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import FlipMove from 'react-flip-move';
 
-import { Players } from "../api/players";
+import { Players, CalculatePlayerPositions } from "../api/players";
 import Player from "../ui/Player";
 
 export default class PlayerList extends Component {
@@ -14,27 +15,21 @@ export default class PlayerList extends Component {
 
   render() {
     const players = Players.find({}, { sort: { score: -1 } }).fetch();
+    const positionedPlayers = CalculatePlayerPositions(players);
 
-    if(!players.length) {
+    if(!positionedPlayers.length) {
       return (
-        <h1>
-          Add a player to get started.
-        </h1>
+        <div className="item">
+          <p className="item__message">Add your first player to get started!</p>
+        </div>
       )
     } else {
       return (
-        <table style={{ marginBottom: "30px" }} cellPadding="5">
-          <thead>
-            <tr>
-              <th>Score</th>
-              <th>Name</th>
-              <th colSpan="3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderPlayers(players)}
-          </tbody>
-        </table>
+        <div>
+          <FlipMove maintainContainerHeight={true}>
+            {this.renderPlayers(positionedPlayers)}
+          </FlipMove>
+        </div>
       )
     }
   }

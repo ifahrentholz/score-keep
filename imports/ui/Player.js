@@ -25,30 +25,23 @@ export default class Player extends Component {
 
   render() {
     const player = this.props.player;
+    let itemClassName = `item item--position-${this.props.player.rank}`;
     return (
-      <tr key={player._id}>
-        <td>
-          {player.score}
-        </td>
-        <td>
-          {player.name}
-        </td>
-        <td>
-          <button onClick={() => this.handleIncrement(event, player)}>
-            +
-          </button>
-        </td>
-        <td>
-          <button onClick={() => this.handleDecrement(event, player)}>
-            -
-          </button>
-        </td>
-        <td>
-          <button onClick={() => this.handleDeletePlayer(event, player)} className="removePlayer">
-            Delete
-          </button>
-        </td>
-      </tr>
+      <div key={player._id} className={itemClassName}>
+        <div className="player">
+          <div>
+            <h3 className="player__name">{player.name}</h3>
+            <p className="player__stats">
+              {player.position} place - {player.score} point(s).
+            </p>
+          </div>
+          <div className="player__actions">
+            <button className="button button--round" onClick={() => this.handleIncrement(event, player)}>+</button>
+            <button className="button button--round" onClick={() => this.handleDecrement(event, player)}>-</button>
+            <button className="button button--round" onClick={() => this.handleDeletePlayer(event, player)}>X</button>
+          </div>
+        </div>
+      </div>
     )
   }
 }

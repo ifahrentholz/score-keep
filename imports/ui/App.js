@@ -9,8 +9,10 @@ export default class App extends Component {
     return (
       <div>
         <TitleBar title="Score Keep" />
-        <PlayerList />
-        <AddPlayer />
+        <div className="wrapper">
+          <PlayerList />
+          <AddPlayer />
+        </div>
       </div>
     )
   }

@@ -20,10 +20,12 @@ export default class AddPlayer extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input ref="playerName" type="text" placeholder="Player name" />
-        <button type="submit">Add Player</button>
-      </form>
+      <div className="item">
+        <form className="form" onSubmit={this.handleSubmit.bind(this)}>
+          <input className="form__input" ref="playerName" type="text" placeholder="Player name" />
+          <button className="button" type="submit">Add Player</button>
+        </form>
+      </div>
     )
   }
 };
