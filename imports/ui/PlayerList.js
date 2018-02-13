@@ -13,7 +13,7 @@ export default class PlayerList extends Component {
   }
 
   render() {
-    const players = Players.find().fetch();
+    const players = Players.find({}, { sort: { score: -1 } }).fetch();
 
     if(!players.length) {
       return (
